@@ -14,7 +14,7 @@ Which can be used across different web based applications.It is used to make the
 7. Intellij or Eclipse
 
 ## Steps to clone execute the tests
-`git clone https://github.com/keshavjha06/SeleniumFramework.git`<br/>
+`git clone https://github.com/keshavjha06/SeleniumE2EProject.git`<br/>
  `cd SeleniumFramework`<br/>
  `mvn clean install`<br/>
  `mvn test`
