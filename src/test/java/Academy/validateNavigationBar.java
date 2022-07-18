@@ -15,42 +15,40 @@ import resources.base;
 
 
 public class validateNavigationBar extends base {
-	public WebDriver driver;
+    public WebDriver driver;
 
-	public static Logger log = LogManager.getLogger(base.class.getName());
+    public static Logger log = LogManager.getLogger(base.class.getName());
 
-	@BeforeTest
+    @BeforeTest
+    public void initialize() throws IOException {
 
-	public void initialize() throws IOException {
+        driver = initializeDriver();
 
-		driver = initializeDriver();
+        driver.get(prop.getProperty("url"));
+    }
 
-		driver.get(prop.getProperty("url"));
-	}
+    @Test
 
-	@Test
+    public void validateAppNavBar() {
 
-	public void validateAppNavBar() throws IOException {
+        // one is inheritance
+        // creating object to that class and invoke methods of it
+        LandingPage l = new LandingPage(driver);
 
-		// one is inheritance
-		// creating object to that class and invoke methods of it
-		LandingPage l = new LandingPage(driver);
+        // compare the text from the browser with actual text.- Error..
 
-		// compare the text from the browser with actual text.- Error..
-		
-		Assert.assertTrue(l.getNavigationBar().isDisplayed());
-		log.info("Navigation Bar is displayed");
-		System.out.println("Test completed");
-		// Assert.assertFalse(false);
-		;
+        Assert.assertTrue(l.getNavigationBar().isDisplayed());
+        log.info("Navigation Bar is displayed");
+        System.out.println("Test completed");
+        // Assert.assertFalse(false);
 
-	}
+    }
 
-	@AfterTest
-	public void teardown() {
+    @AfterTest
+    public void teardown() {
 
-		driver.close();
+        driver.close();
 
-	}
+    }
 
 }
