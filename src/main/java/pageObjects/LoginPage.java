@@ -9,10 +9,10 @@ public class LoginPage {
 
     public WebDriver driver;
 
-    private By email = By.cssSelector("[id='user_email']");
-    private By password = By.cssSelector("[type='password']");
-    private By login = By.cssSelector("[value='Log In']");
-    private By forgotPassword = By.cssSelector("[href*='password/new']");
+    private final By email = By.cssSelector("[id='user_email']");
+    private final By password = By.cssSelector("[type='password']");
+    private final By login = By.cssSelector("[value='Log In']");
+    private final By forgotPassword = By.cssSelector("[href*='password/new']");
 
 
     public LoginPage(WebDriver driver) {

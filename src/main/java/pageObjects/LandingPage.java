@@ -9,10 +9,10 @@ public class LandingPage {
 
     public WebDriver driver;
 
-    private By signin = By.cssSelector("a[href*='sign_in']");
-    private By title = By.cssSelector(".text-center>h2");
-    private By NavBar = By.cssSelector(".nav.navbar-nav.navbar-right>li>a");
-    private By header = By.cssSelector("div[class*='video-banner'] h3");
+    private final By signin = By.cssSelector("a[href*='sign_in']");
+    private final By title = By.cssSelector(".text-center>h2");
+    private final By NavBar = By.cssSelector(".nav.navbar-nav.navbar-right>li>a");
+    private final By header = By.cssSelector("div[class*='video-banner'] h3");
 
 
     public LandingPage(WebDriver driver) {
