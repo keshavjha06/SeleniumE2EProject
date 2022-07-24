@@ -9,8 +9,8 @@ public class ForgotPassword {
 
     public WebDriver driver;
 
-    private final By email = By.cssSelector("[id='user_email']");
-    private final By sendMeInstructions = By.cssSelector("[type='submit']");
+    private final By EMAIL = By.cssSelector("[id='user_email']");
+    private final By SEND_ME_INSTRUCTIONS = By.cssSelector("[type='submit']");
 
 
     public ForgotPassword(WebDriver driver) {
@@ -21,11 +21,11 @@ public class ForgotPassword {
 
 
     public WebElement getEmail() {
-        return driver.findElement(email);
+        return driver.findElement(EMAIL);
     }
 
     public WebElement sendMeInstructions() {
-        return driver.findElement(sendMeInstructions);
+        return driver.findElement(SEND_ME_INSTRUCTIONS);
     }
 
 

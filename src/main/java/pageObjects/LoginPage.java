@@ -9,10 +9,10 @@ public class LoginPage {
 
     public WebDriver driver;
 
-    private final By email = By.cssSelector("[id='user_email']");
-    private final By password = By.cssSelector("[type='password']");
-    private final By login = By.cssSelector("[value='Log In']");
-    private final By forgotPassword = By.cssSelector("[href*='password/new']");
+    private final By EMAIL = By.cssSelector("[id='user_email']");
+    private final By PASSWORD = By.cssSelector("[type='password']");
+    private final By LOGIN = By.cssSelector("[value='Log In']");
+    private final By FORGOT_PASSWORD = By.cssSelector("[href*='password/new']");
 
 
     public LoginPage(WebDriver driver) {
@@ -23,22 +23,22 @@ public class LoginPage {
 
 
     public ForgotPassword forgotPassword() {
-        driver.findElement(forgotPassword).click();
+        driver.findElement(FORGOT_PASSWORD).click();
         return new ForgotPassword(driver);
 
     }
 
     public WebElement getEmail() {
-        return driver.findElement(email);
+        return driver.findElement(EMAIL);
     }
 
 
     public WebElement getPassword() {
-        return driver.findElement(password);
+        return driver.findElement(PASSWORD);
     }
 
     public WebElement getLogin() {
-        return driver.findElement(login);
+        return driver.findElement(LOGIN);
     }
 
 
