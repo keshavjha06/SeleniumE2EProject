@@ -5,7 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import academy.AbstractComponents.AbstractComponent;
+import academy.abstractcomponent.AbstractComponent;
 
 public class ConfirmationPage extends AbstractComponent {
 
