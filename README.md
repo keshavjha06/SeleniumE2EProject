@@ -10,6 +10,7 @@ Which can be used across different web based applications.It is used to make the
 - Maven - Build automation tool
 - Java - Programming language
 - TestNG - Test Management library
+- BDD - Cucumber
 - Extent Reports - Reporting framework
 - GitHub - Version control
 - Jenkins - CI/CD
