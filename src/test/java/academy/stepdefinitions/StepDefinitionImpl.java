@@ -60,7 +60,7 @@ public class StepDefinitionImpl extends BaseTest {
     }
 
     @Then("\"(.*)\" message is displayed$")
-    public void something_message_is_displayed(String strArg1) throws Throwable {
+    public void something_message_is_displayed(String strArg1) {
         Assert.assertEquals(strArg1, landingPage.getErrorMessage());
         driver.close();
     }

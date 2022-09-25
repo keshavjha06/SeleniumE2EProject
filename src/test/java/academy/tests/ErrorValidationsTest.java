@@ -16,7 +16,7 @@ import academy.pageobjects.ProductCatalogue;
 public class ErrorValidationsTest extends BaseTest {
 
     @Test(groups = {"ErrorHandling"}, retryAnalyzer = Retry.class)
-    public void LoginErrorValidation() throws IOException, InterruptedException {
+    public void LoginErrorValidation() {
 
 
         landingPage.loginApplication("anshika@gmail.com", "Iamki000");
@@ -26,7 +26,7 @@ public class ErrorValidationsTest extends BaseTest {
 
 
     @Test
-    public void ProductErrorValidation() throws IOException, InterruptedException {
+    public void ProductErrorValidation() throws InterruptedException {
 
         String productName = "ZARA COAT 3";
         ProductCatalogue productCatalogue = landingPage.loginApplication("rahulshetty@gmail.com", "Iamking@000");
