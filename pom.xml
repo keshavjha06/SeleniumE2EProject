@@ -9,14 +9,15 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
+        <maven.compiler.source>26</maven.compiler.source>
+        <maven.compiler.target>26</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
     <dependencies>
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.0.3</version>
+            <version>6.3.4</version>
             <exclusions>
                 <exclusion>
                     <groupId>com.google.guava</groupId>
@@ -27,33 +28,33 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>4.3.0</version>
+            <version>4.43.0</version>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>7.5.0</version>
+            <version>7.34.3</version>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-testng</artifactId>
-            <version>7.5.0</version>
+            <version>7.34.3</version>
         </dependency>
         <dependency>
             <groupId>com.aventstack</groupId>
             <artifactId>extentreports</artifactId>
-            <version>5.0.9</version>
+            <version>5.1.2</version>
         </dependency>
         <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
-            <version>7.4.0</version>
+            <version>7.12.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
-            <version>2.13.4</version>
+            <version>2.21.2</version>
         </dependency>
     </dependencies>
     <profiles>
@@ -65,7 +66,7 @@
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-surefire-plugin</artifactId>
-                            <version>3.0.0-M7</version>
+                            <version>3.5.2</version>
                             <configuration>
                                 <suiteXmlFiles>
                                     <suiteXmlFile>testsuites/testng.xml</suiteXmlFile>
@@ -84,7 +85,7 @@
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-surefire-plugin</artifactId>
-                            <version>3.0.0-M7</version>
+                            <version>3.5.2</version>
                             <configuration>
                                 <suiteXmlFiles>
                                     <suiteXmlFile>testsuites/Purchase.xml</suiteXmlFile>
@@ -103,7 +104,7 @@
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-surefire-plugin</artifactId>
-                            <version>3.0.0-M7</version>
+                            <version>3.5.2</version>
                             <configuration>
                                 <includes>
                                     <include>**/TestNGTestRunner.java</include>
@@ -122,7 +123,7 @@
                         <plugin>
                             <groupId>org.apache.maven.plugins</groupId>
                             <artifactId>maven-surefire-plugin</artifactId>
-                            <version>3.0.0-M7</version>
+                            <version>3.5.2</version>
                             <configuration>
                                 <suiteXmlFiles>
                                     <suiteXmlFile>testsuites/ErrorValidationTests.xml</suiteXmlFile>
