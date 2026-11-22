@@ -3,9 +3,13 @@ package academy.stepdefinitions;
 import java.io.IOException;
 import java.util.List;
 
+import io.cucumber.java.After;
+import io.cucumber.java.Scenario;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import academy.testcomponents.BaseTest;
@@ -56,13 +60,23 @@ public class StepDefinitionImpl extends BaseTest {
     public void message_displayed_confirmationPage(String string) {
         String confirmMessage = confirmationPage.getConfirmationMessage();
         Assert.assertTrue(confirmMessage.equalsIgnoreCase(string));
-        driver.close();
     }
 
     @Then("\"(.*)\" message is displayed$")
     public void something_message_is_displayed(String strArg1) {
-        Assert.assertEquals(strArg1, landingPage.getErrorMessage());
-        driver.close();
+        Assert.assertEquals(landingPage.getErrorMessage(), strArg1);
+    }
+
+    @After
+    public void tearDownScenario(Scenario scenario) {
+        if (driver == null) {
+            return;
+        }
+        if (scenario.isFailed()) {
+            byte[] png = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            scenario.attach(png, "image/png", "Failure screenshot");
+        }
+        driver.quit();
     }
 
 

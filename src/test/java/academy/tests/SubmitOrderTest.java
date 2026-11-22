@@ -48,7 +48,7 @@ public class SubmitOrderTest extends BaseTest {
     }
 
 
-    //Extent Reports -
+
     @DataProvider
     public Object[][] getData() throws IOException {
         List<HashMap<String, String>> data = getJsonDataToMap(System.getProperty("user.dir") + "/src/test/java/academy/data/PurchaseOrder.json");

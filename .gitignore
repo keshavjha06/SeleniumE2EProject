@@ -2,3 +2,8 @@
 /target/
 .vscode
 .DS_Store
+allure-results/
+allure-report/
+reports/
+.allure/
+*.versionsBackup

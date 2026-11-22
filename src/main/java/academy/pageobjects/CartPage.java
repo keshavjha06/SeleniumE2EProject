@@ -27,6 +27,7 @@ public class CartPage extends AbstractComponent {
     }
 
     public Boolean VerifyProductDisplay(String productName) {
+        waitForElementToAppear(org.openqa.selenium.By.cssSelector(".cartSection h3"));
         Boolean match = cartProducts.stream().anyMatch(product -> product.getText().equalsIgnoreCase(productName));
         return match;
 

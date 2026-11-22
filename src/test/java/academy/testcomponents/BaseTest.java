@@ -2,8 +2,11 @@ package academy.testcomponents;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import io.qameta.allure.Allure;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -11,6 +14,7 @@ import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
 import org.apache.commons.io.FileUtils;
@@ -45,6 +49,15 @@ public class BaseTest {
 
         if (browserName.contains("chrome")) {
             ChromeOptions options = new ChromeOptions();
+            // Chrome's password manager shows a "Change your password" breach dialog after
+            // login with a leaked test password. That browser-level dialog swallows native
+            // WebDriver clicks, so disable the password manager and leak detection.
+            Map<String, Object> prefs = new HashMap<>();
+            prefs.put("credentials_enable_service", false);
+            prefs.put("profile.password_manager_enabled", false);
+            prefs.put("profile.password_manager_leak_detection", false);
+            options.setExperimentalOption("prefs", prefs);
+            options.addArguments("--disable-features=PasswordLeakDetection,PasswordCheck");
             WebDriverManager.chromedriver().setup();
             if (browserName.contains("headless")) {
                 options.addArguments("headless");
@@ -84,12 +97,17 @@ public class BaseTest {
         // {map, map}
     }
 
-    public String getScreenshot(String testCaseName, WebDriver driver) throws IOException {
-        TakesScreenshot ts = (TakesScreenshot) driver;
-        File source = ts.getScreenshotAs(OutputType.FILE);
-        File file = new File(System.getProperty("user.dir") + "/reports" + testCaseName + ".png");
-        FileUtils.copyFile(source, file);
-        return System.getProperty("user.dir") + "/reports" + testCaseName + ".png";
+    /** Attaches a PNG screenshot of the current browser state to the Allure report. */
+    public void attachScreenshot(String name) {
+        if (driver == null) {
+            return;
+        }
+        try {
+            byte[] png = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
+            Allure.addAttachment(name, "image/png", new ByteArrayInputStream(png), "png");
+        } catch (Exception e) {
+            System.err.println("Could not capture screenshot: " + e.getMessage());
+        }
     }
 
     @BeforeMethod(alwaysRun = true)
@@ -101,7 +119,11 @@ public class BaseTest {
     }
 
     @AfterMethod(alwaysRun = true)
-    public void tearDown() {
+    public void tearDown(ITestResult result) {
+        // Capture before quit: TestNG calls @AfterMethod before ITestListener.onTestFailure
+        if (result.getStatus() == ITestResult.FAILURE) {
+            attachScreenshot("Failure screenshot - " + result.getMethod().getMethodName());
+        }
         if (driver != null) {
             driver.quit();
         }

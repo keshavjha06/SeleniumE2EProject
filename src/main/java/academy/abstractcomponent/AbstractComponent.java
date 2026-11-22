@@ -45,23 +45,43 @@ public class AbstractComponent {
 
     }
 
+    /** Full-screen loading overlay; while present it swallows every click on the page. */
+    private static final By SPINNER_OVERLAY = By.cssSelector(".ngx-spinner-overlay");
+
+    /**
+     * Waits until no element matching the locator is visible. The implicit wait is
+     * switched off meanwhile, otherwise each check of an absent element blocks for 10s.
+     */
+    public void waitForElementToDisappear(By locator) {
+        Duration implicitWait = driver.manage().timeouts().getImplicitWaitTimeout();
+        driver.manage().timeouts().implicitlyWait(Duration.ZERO);
+        try {
+            new WebDriverWait(driver, Duration.ofSeconds(20))
+                    .until(ExpectedConditions.invisibilityOfElementLocated(locator));
+        } finally {
+            driver.manage().timeouts().implicitlyWait(implicitWait);
+        }
+    }
+
+    public void waitForSpinnerToDisappear() {
+        waitForElementToDisappear(SPINNER_OVERLAY);
+    }
+
+    /** Clicks a header link once the overlay is gone and waits for the route to change. */
+    private void clickAndWaitForUrl(WebElement link, String urlFragment) {
+        waitForSpinnerToDisappear();
+        link.click();
+        new WebDriverWait(driver, Duration.ofSeconds(10)).until(ExpectedConditions.urlContains(urlFragment));
+    }
+
     public CartPage goToCartPage() {
-        cartHeader.click();
-        CartPage cartPage = new CartPage(driver);
-        return cartPage;
+        clickAndWaitForUrl(cartHeader, "/dashboard/cart");
+        return new CartPage(driver);
     }
 
     public OrderPage goToOrdersPage() {
-        orderHeader.click();
-        OrderPage orderPage = new OrderPage(driver);
-        return orderPage;
-    }
-
-    public void waitForElementToDisappear(WebElement ele) throws InterruptedException {
-        Thread.sleep(1000);
-//		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
-//		wait.until(ExpectedConditions.invisibilityOf(ele));
-
+        clickAndWaitForUrl(orderHeader, "/dashboard/myorders");
+        return new OrderPage(driver);
     }
 
 }
