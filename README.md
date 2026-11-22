@@ -11,7 +11,7 @@ Which can be used across different web based applications.It is used to make the
 - Java - Programming language
 - TestNG - Test Management library
 - BDD - Cucumber
-- Extent Reports - Reporting framework
+- Allure - Reporting framework
 - GitHub - Version control
 - Jenkins - CI/CD
 
@@ -22,8 +22,10 @@ Which can be used across different web based applications.It is used to make the
  `mvn test`
 
 ## Screenshot:
-- Take Screenshots On test failures Method will automatically capture & store the screenshots under /reports directory. 
-  The screenshot files will be named of the test method name.
+- On a test failure a screenshot is captured automatically (before the browser closes) and attached to the Allure report,
+  for both TestNG tests and Cucumber scenarios.
 
 ## Reporting:
-- The framework produce index.html report. It resides in the reports folder.This reports gives the link to all the different component of the TestNG reports like Groups & Reporter Output. On clicking these will display detailed descriptions of execution.
+- Allure results are written to `target/allure-results` on every run (TestNG and Cucumber).
+- `mvn allure:serve` - build the report and open it in a browser
+- `mvn allure:report` - build a static report at `target/site/allure-maven-plugin/index.html`
