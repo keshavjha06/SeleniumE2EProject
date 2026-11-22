@@ -48,10 +48,6 @@ public class AbstractComponent {
     /** Full-screen loading overlay; while present it swallows every click on the page. */
     private static final By SPINNER_OVERLAY = By.cssSelector(".ngx-spinner-overlay");
 
-    /**
-     * Waits until no element matching the locator is visible. The implicit wait is
-     * switched off meanwhile, otherwise each check of an absent element blocks for 10s.
-     */
     public void waitForElementToDisappear(By locator) {
         Duration implicitWait = driver.manage().timeouts().getImplicitWaitTimeout();
         driver.manage().timeouts().implicitlyWait(Duration.ZERO);
@@ -67,7 +63,6 @@ public class AbstractComponent {
         waitForElementToDisappear(SPINNER_OVERLAY);
     }
 
-    /** Clicks a header link once the overlay is gone and waits for the route to change. */
     private void clickAndWaitForUrl(WebElement link, String urlFragment) {
         waitForSpinnerToDisappear();
         link.click();
